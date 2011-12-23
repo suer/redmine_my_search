@@ -1,5 +1,4 @@
-= Redmine My Search Plugin
-
+Redmine My Search Plugin
 ====================================
 This plugin generate text data for searching.
 
