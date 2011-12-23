@@ -6,7 +6,7 @@ class MySearchController < ApplicationController
   def index
     retrieve_query
     @issues = @query.issues
-    render :text => @issues.inject('') {|list, issue| list << issue_to_s(issue) }
+    render :text => @issues.inject('') {|list, issue| list << issue_to_s(issue) }, :content_type => 'text/plain'
   end
 
   private
