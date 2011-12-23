@@ -20,6 +20,11 @@ Requirements
 ------------------------------
 * Redmine 1.2 or later
 
+Credits
+------------------------------
+* Chrome Extesions is forked from [my-bookmark-seach.crx](https://github.com/Cside/my-bookmark-seach.crx)
+* Chrome Extension uses the icon from [Redmine Icon](https://github.com/edavis10/redmine_logo/blob/master/COPYRIGHT)
+
 License
 ------------------------------
 The MIT License (MIT)

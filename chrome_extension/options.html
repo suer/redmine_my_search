@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>My Redmine Search for Chrome</title>
+    <meta HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="stylesheets/main.css" type="text/css" media="all">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="options.js"></script>
+  </head>
+  <body>
+    <div class='main'>
+      <div class='header'>
+        <h1 style='font-size:1.5em;'>My Redmine Search for Chrome</h1>
+      </div>
+      <div class='content'>
+        <form onsubmit="javascript:window.close();">
+          <fieldset>
+            <div class="clearfix">
+              <div class="left">
+                <label>Redmine URL</label>
+              </div>
+              <div class="right">
+                <input name="redmine-url" id="redmine-url" class="text" placeholder="http://localhost:3000/redmine/" autofocus="false" /><br/>
+                Your need to install <a href="https://github.com/suer/redmine_my_search/">My Redmine Search Plugin</a>
+              </div>
+            </div>
+          </fieldset>
+          <div class="buttons">
+            <input value="Save" class="button save" type="submit" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
