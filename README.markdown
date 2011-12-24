@@ -16,6 +16,8 @@ Type below commands:
 
 Then, restart your redmine.
 
+Access to http://HOST_NAME:PORT_NUMBER/redmine/my_search/ to install the chrome extension.
+
 Requirements
 ------------------------------
 * Redmine 1.2 or later
