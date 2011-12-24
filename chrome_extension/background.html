@@ -9,7 +9,7 @@
 function c (s) { console.log(s) }
 function a (s) { alert(s) }
 var redmineUrl = localStorage["redmine-url"];
-redmineUrl = appendLastSlash(redmineUrl) + "my_search/data";
+redmineUrl = appendLastSlash(redmineUrl) + "my_search/data.txt";
 var apiKey = localStorage["redmine-key"];
 if (apiKey != null && apiKey != "") {
     redmineUrl = redmineUrl + "?key=" + apiKey;
