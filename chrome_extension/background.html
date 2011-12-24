@@ -12,7 +12,7 @@ var redmineUrl = localStorage["redmine-url"];
 redmineUrl = appendLastSlash(redmineUrl) + "my_search/data";
 var apiKey = localStorage["redmine-key"];
 if (apiKey != null && apiKey != "") {
-    redmineUrl = redmineUrl + "?api_key=" + apiKey;
+    redmineUrl = redmineUrl + "?key=" + apiKey;
 }
 
 var INDEX = [];
