@@ -24,6 +24,6 @@
 .text {
     width: 50%;
 }
-#redmine-url {
+#redmine-url,#redmine-key {
     width: 100%;
 }
