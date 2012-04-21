@@ -1,6 +1,6 @@
 class MySearchController < ApplicationController
   unloadable
-  accept_key_auth :data
+  accept_api_auth :data
 
   include QueriesHelper
   include MySearchHelper
