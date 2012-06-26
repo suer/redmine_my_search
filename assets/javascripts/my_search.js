@@ -1,8 +1,8 @@
 // my search plugin
 
+(function(document, window, undefined) {
 var data = [];
 var selectedData = null;
-var baseURL = null;
 document.addEventListener('keydown', function(e) {
     if (e.ctrlKey && e.keyCode == 71) {
         toggleBox();
@@ -48,15 +48,15 @@ function toggleBox() {
 }
 
 function loadData() {
-	var myAjax = new Ajax.Request(
-		baseURL + '/my_search/data_all',
-		{
-			method: 'get', 
-			parameters: '', 
-			onComplete: function (request) {
-                parseData(request.responseText);
-            }
-		});
+    new Ajax.Request(
+        getBaseURL() + '/my_search/data_all',
+        {
+          method: 'get',
+          parameters: '',
+          onComplete: function (request) {
+            parseData(request.responseText);
+          }
+        });
 }
 
 function parseData(text) {
@@ -76,6 +76,8 @@ function parseData(text) {
     }
 }
 
-function setBaseURL(url) {
-    baseURL = url;
+function getBaseURL() {
+    return document.getElementsByTagName('script')[0].src.split('/javascripts')[0];
 }
+
+})(document, window);
