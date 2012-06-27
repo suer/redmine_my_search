@@ -17,8 +17,15 @@
         toggleBox();
     });
 
+    $('my-search-input').addEventListener('keypress', function(e) {
+        if (e.keyCode != ENTER) {
+            return;
+        }
+        move();
+    }, false);
+
     $('my-search-input').addEventListener('keyup', function(e) {
-        if ([DOWN, UP, ENTER].indexOf(e.keyCode) >= 0) {
+        if ([DOWN, UP].indexOf(e.keyCode) >= 0) {
             return;
         }
         var value = $('my-search-input').value;
@@ -30,10 +37,7 @@
     });
 
     $('my-search-input').addEventListener('keydown', function(e) {
-        if (e.keyCode == ENTER) {
-            move();
-            return;
-        } else if (e.keyCode == DOWN) {
+        if (e.keyCode == DOWN) {
             if (selectedIndex < Math.min(MAX_MATCHED, matchedData.length) - 1) {
                 selectedIndex += 1;
                 select(selectedIndex);
