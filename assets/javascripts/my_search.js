@@ -6,6 +6,7 @@
     var RIGHT = 39;
     var DOWN = 40;
     var ENTER = 13;
+    var ESC = 27;
 
     var MAX_MATCHED = 5;
 
@@ -43,14 +44,14 @@
                 select(selectedIndex);
             }
             Event.stop(e);
-            return;
         } else if (e.keyCode == UP) {
             if (selectedIndex > 0) {
                 selectedIndex -= 1;
                 select(selectedIndex);
             }
             Event.stop(e);
-            return;
+        } else if (e.keyCode == ESC) {
+            toggleBox();
         }
     });
 
@@ -92,6 +93,9 @@
             $('my-search-input').focus();
         } else {
             $('my-search-box').style.display = 'none';
+            $('my-search-input').value = '';
+            matchedData = [];
+            displayResults();
         }
     }
 
