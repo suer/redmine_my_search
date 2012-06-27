@@ -8,7 +8,7 @@
     var ENTER = 13;
     var ESC = 27;
 
-    var MAX_MATCHED = 5;
+    var MAX_MATCHED = 10;
 
     var data = [];
     var matchedData = [];
