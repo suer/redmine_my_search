@@ -128,11 +128,14 @@
             } else if (i % 3 == 2) {
                 obj['url'] = textArray[i];
                 if (obj['url'].match(wikiPageRegExp)) {
-                    obj['type'] = obj['url'].match(wikiPageRegExp)[1] + ' Wiki';
+                    obj['type'] = 'Wiki';
+                    obj['subtitle'] = obj['url'].match(wikiPageRegExp)[1];
                 } else if (obj['url'].match(projectPageRegExp)) {
                     obj['type'] = 'Project';
+                    obj['subtitle'] = '';
                 } else if (obj['url'].match(issuePageRegExp)) {
-                    obj['type'] = '#' + obj['url'].match(issuePageRegExp)[1] + ' Issue';
+                    obj['type'] = 'Issue';
+                    obj['subtitle'] = '#' + obj['url'].match(issuePageRegExp)[1];
                 }
                 data.push(obj);
                 obj = {};
@@ -147,13 +150,26 @@
         for (var i = 0; i < min; i++) {
             html = '<div id="my-search-result-' + i + '">'
             html += '<span>' + matchedData[i]['title'] + '</span> '
-            html += '<span class="my-search-result-type">' + matchedData[i]['type'] + '</span>'
+            html += generateSubtitleElement(matchedData[i]);
             html += '</div>';
             new Insertion.Bottom('my-search-results', html);
         }
         if (min > 0) {
             select(0);
         }
+    }
+
+    function generateSubtitleElement(matchedDatum) {
+      var html = '';
+      html += '<span class="my-search-result-type ';
+      html += 'my-search-result-type-';
+      html += matchedDatum['type'].toLowerCase();
+      html += '">';
+      html += matchedDatum['subtitle'];
+      html += ' ';
+      html += matchedDatum['type'];
+      html += '</span>';
+      return html;
     }
 
     function getBaseURL() {

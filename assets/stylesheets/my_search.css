@@ -41,6 +41,19 @@
     float: right;
 }
 
+.my-search-result-type-project {
+  color: #DD4B39;
+}
+
+.my-search-result-type-wiki {
+  color: #EFD809;
+}
+
+.my-search-result-type-issue {
+  color: #0099CC;
+}
+
 #my-search-results {
     margin-top: 10px;
 }
+
