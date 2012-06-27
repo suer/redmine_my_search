@@ -128,11 +128,11 @@
             } else if (i % 3 == 2) {
                 obj['url'] = textArray[i];
                 if (obj['url'].match(wikiPageRegExp)) {
-                    obj['type'] = 'Wiki: ' + obj['url'].match(wikiPageRegExp)[1];
+                    obj['type'] = obj['url'].match(wikiPageRegExp)[1] + ' Wiki';
                 } else if (obj['url'].match(projectPageRegExp)) {
                     obj['type'] = 'Project';
                 } else if (obj['url'].match(issuePageRegExp)) {
-                    obj['type'] = 'Issue #' + obj['url'].match(issuePageRegExp)[1];
+                    obj['type'] = '#' + obj['url'].match(issuePageRegExp)[1] + ' Issue';
                 }
                 data.push(obj);
                 obj = {};
