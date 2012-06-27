@@ -13,9 +13,12 @@
     var data = [];
     var matchedData = [];
     var selectedIndex = 0;
+    var prevValue = null;
 
     $$('.my-search-plugin-menu')[0].addEventListener('click', function(e) {
         toggleBox();
+        Event.stop(e);
+        return false;
     });
 
     $('my-search-input').addEventListener('keypress', function(e) {
@@ -33,8 +36,11 @@
         if (value == null || value.length == 0) {
             return;
         }
-        search(value);
-        displayResults();
+        if (value != prevValue) {
+            prevValue = value;
+            search(value);
+            displayResults();
+        }
     });
 
     $('my-search-input').addEventListener('keydown', function(e) {
@@ -95,6 +101,7 @@
             $('my-search-box').style.display = 'none';
             $('my-search-input').value = '';
             matchedData = [];
+            prevValue = null;
             displayResults();
         }
     }
