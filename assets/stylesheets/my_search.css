@@ -1,3 +1,34 @@
 #my-search-box {
+    display: none;
+    position: fixed;
+    z-index: 2147483647;
+    border-radius: 6px;
+    width: 90%;
+    height: auto;
+    border: 1px solid #707070;
+    opacity: 1;
+    overflow: auto;
+    -webkit-transition: opacity 0.1s linear;
+    color: white;
+    background-color: rgba(51, 51, 51, 0.648438);
+    left: 5%;
+    line-height: 20px;
+    margin: 0px;
+    padding: 4px 6px;
+    text-align: left;
+    top: 50%;
+}
 
+#my-search-box input {
+    outline: none;
+    -webkit-box-shadow: none;
+    width: 90%;
+    background: none;
+    padding: 0px;
+    margin: 3px 0px;
+    border: none;
+    border-image: initial;
+    height: auto;
+    font-size: 30px;
+    color: white;
 }
