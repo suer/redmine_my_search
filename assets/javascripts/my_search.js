@@ -2,6 +2,7 @@
 
 var data = [];
 var selectedData = null;
+var baseURL = null;
 document.addEventListener('keydown', function(e) {
     if (e.ctrlKey && e.keyCode == 71) {
         toggleBox();
@@ -48,7 +49,7 @@ function toggleBox() {
 
 function loadData() {
 	var myAjax = new Ajax.Request(
-		'http://localhost:3000/my_search/data_all', 
+		baseURL + '/my_search/data_all',
 		{
 			method: 'get', 
 			parameters: '', 
@@ -73,4 +74,8 @@ function parseData(text) {
             obj = {};
         }
     }
+}
+
+function setBaseURL(url) {
+    baseURL = url;
 }
