@@ -1,7 +1,7 @@
 // my search plugin
 
 document.addEventListener('keydown', function(e) {
-    if (e.keyCode == 191) {
+    if (e.ctrlKey && e.keyCode == 71) {
         toggleBox();
     }
 });
