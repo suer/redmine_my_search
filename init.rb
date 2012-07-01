@@ -1,4 +1,5 @@
 require 'redmine'
+require 'my_search_view_listener'
 
 Redmine::Plugin.register :redmine_my_search do
   name 'Redmine My Search plugin'
