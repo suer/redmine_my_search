@@ -6,9 +6,6 @@
     document.addEventListener('keydown', function(e) {
         if (e.ctrlKey && e.keyCode == 71) {
             toggleBox();
-            if (data.length == 0) {
-                loadData();
-            }
         }
     });
 
@@ -37,6 +34,10 @@
     });
 
     function toggleBox() {
+        if (data.length == 0) {
+            loadData();
+        }
+
         var display = $('my-search-box').style.display;
         if (display == 'none') {
             $('my-search-box').style.display = 'block';
@@ -44,7 +45,6 @@
         } else {
             $('my-search-box').style.display = 'none';
         }
-
     }
 
     function loadData() {
@@ -55,6 +55,8 @@
                 parameters: '',
                 onComplete: function (request) {
                     parseData(request.responseText);
+                    $('my-search-box').style.display = 'block';
+                    $('my-search-input').focus();
                 }
             });
     }
