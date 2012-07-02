@@ -2,7 +2,7 @@
 
 (function(document, window, undefined) {
     var data = [];
-    var selectedData = null;
+    var matchedData = [];
     document.addEventListener('keydown', function(e) {
         if (e.ctrlKey && e.keyCode == 71) {
             toggleBox();
@@ -13,8 +13,8 @@
         if (e.ctrlKey && e.keyCode == 71) {
             return;
         }
-        if (e.keyCode == 13 && selectedData) {
-            location.href = selectedData['url'];
+        if (e.keyCode == 13 && matchedData.length > 0) {
+            location.href = matchedData[0]['url'];
         }
         var value = $('my-search-input').value;
         if (value == null || value.length == 0) {
@@ -22,15 +22,19 @@
         }
         var len = data.length;
         var regExp = new RegExp(value);
+        matchedData = [];
         for (var i = 0; i < len; i++) {
             target = data[i]['title'] + data[i]['description'];
             if (target.match(regExp)) {
-                $('my-search-title').innerHTML = data[i]['title'];
-                $('my-search-description').innerHTML = data[i]['description'];
-                $('my-search-url').innerHTML = data[i]['url'];
-                selectedData = data[i];
+                matchedData.push(data[i]);
             }
         }
+        if (matchedData.length > 0) {
+            $('my-search-title').innerHTML = matchedData[0]['title'];
+            $('my-search-description').innerHTML = matchedData[0]['description'];
+            $('my-search-url').innerHTML = matchedData[0]['url'];
+        }
+
     });
 
     function toggleBox() {
