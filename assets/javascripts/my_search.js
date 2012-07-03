@@ -8,6 +8,8 @@
     var G = 71;
     var ENTER = 13;
 
+    var MAX_MATCHED = 5;
+
     var data = [];
     var matchedData = [];
     var selectedIndex = 0;
@@ -21,9 +23,11 @@
         if (e.ctrlKey && e.keyCode == G) {
             return;
         }
-        if (matchedData.length > 0)
         if (e.keyCode == ENTER) {
-            location.href = matchedData[0]['url'];
+            var url = $('my-search-url').innerText;
+            if (url) {
+                location.href = url;
+            }
             return;
         } else if (e.keyCode == DOWN) {
             if (selectedIndex < matchedData.length - 1) {
@@ -56,15 +60,21 @@
                 matchedData.push(data[i]);
             }
         }
-        if (matchedData.length > 0) {
-            $('my-search-title').innerHTML = matchedData[0]['title'];
-            $('my-search-description').innerHTML = matchedData[0]['description'];
-            $('my-search-url').innerHTML = matchedData[0]['url'];
-        }
     }
 
     function select(index) {
-        $('my-search-result-' + index).style.backgroundColor = '#c0c0c0';
+        var min = Math.min(MAX_MATCHED, matchedData.length);
+        for (var i = 0; i < min; i++) {
+            if (i == index) {
+                $('my-search-result-' + i).style.backgroundColor = '#888888';
+            } else {
+                $('my-search-result-' + i).style.backgroundColor = '#333333';
+            }
+        }
+
+        $('my-search-title').innerHTML = matchedData[index]['title'];
+        $('my-search-description').innerHTML = matchedData[index]['description'];
+        $('my-search-url').innerHTML = matchedData[index]['url'];
     }
 
     function toggleBox() {
@@ -115,7 +125,8 @@
     function displayResults() {
         $('my-search-results').innerHTML = '';
         var len = matchedData.length;
-        for (var i = 0; i < len; i++) {
+        var min = Math.min(MAX_MATCHED, len);
+        for (var i = 0; i < min; i++) {
             html = '<div id="my-search-result-' + i + '">'
             html += '<span>' + matchedData[i]['title'] + '</span>: '
             html += '<span>' + matchedData[i]['description'] + '</span>'
@@ -123,6 +134,10 @@
             html += '</div>';
             new Insertion.Bottom('my-search-results', html);
         }
+        if (min > 0) {
+            select(0);
+        }
+
     }
 
     function getBaseURL() {
