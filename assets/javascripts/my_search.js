@@ -106,6 +106,9 @@
     }
 
     function parseData(text) {
+        var wikiPageRegExp = new RegExp(".+/projects/.+/wiki/.+");
+        var projectPageRegExp = new RegExp(".+/projects/.+");
+        var issuePageRegExp = new RegExp(".+/issues/.+");
         var textArray = text.split(/\r\n|\r|\n/);
         var len = textArray.length;
         var obj = {}
@@ -117,6 +120,13 @@
             } else if (i % 3 == 2) {
                 obj['url'] = textArray[i];
                 data.push(obj);
+                if (obj['url'].match(wikiPageRegExp)) {
+                    obj['type'] = 'Wiki';
+                } else if (obj['url'].match(projectPageRegExp)) {
+                    obj['type'] = 'Project';
+                } else if (obj['url'].match(issuePageRegExp)) {
+                    obj['type'] = 'Issue';
+                }
                 obj = {};
             }
         }
@@ -129,7 +139,7 @@
         for (var i = 0; i < min; i++) {
             html = '<div id="my-search-result-' + i + '">'
             html += '<span>' + matchedData[i]['title'] + '</span> '
-            html += '<span class="my-search-url">' + matchedData[i]['url'] + '</span>'
+            html += '<span class="my-search-result-type">' + matchedData[i]['type'] + '</span>'
             html += '</div>';
             new Insertion.Bottom('my-search-results', html);
         }
