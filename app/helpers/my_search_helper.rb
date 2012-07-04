@@ -18,4 +18,15 @@ module MySearchHelper
     text << url_for(:controller => 'projects', :action => 'show', :id => project)
     text << "\n"
   end
+
+  def wiki_page_to_s(wiki_page)
+    text = ''
+    text << wiki_page.title
+    text << "\n"
+    text << ''
+    text << "\n"
+    text << url_for(:controller => 'wiki', :action => 'show', :project_id => wiki_page.project, :id => wiki_page.title)
+    text << "\n"
+  end
+
 end
