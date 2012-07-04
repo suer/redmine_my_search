@@ -6,6 +6,7 @@
     var RIGHT = 39;
     var DOWN = 40;
     var G = 71;
+    var ESC =27;
     var ENTER = 13;
 
     var MAX_MATCHED = 5;
@@ -14,7 +15,8 @@
     var matchedData = [];
     var selectedIndex = 0;
     document.addEventListener('keydown', function(e) {
-        if (e.ctrlKey && e.keyCode == G) {
+        console.log(e.keyCode);
+        if ((e.ctrlKey && e.keyCode == G) || e.keyCode == ESC) {
             toggleBox();
         }
     });
