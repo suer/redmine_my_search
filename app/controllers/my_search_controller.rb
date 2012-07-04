@@ -14,8 +14,8 @@ class MySearchController < ApplicationController
   def data_all
     retrieve_query
     issues = Issue.visible.find(:all, :order => "issues.id desc")
-    data = issues.inject('') {|list, issue| list << issue_to_s(issue) }
-    data << Project.visible.inject('') {|list, project| list << project_to_s(project) }
+    data = Project.visible.inject('') {|list, project| list << project_to_s(project) }
+    data << issues.inject('') {|list, issue| list << issue_to_s(issue) }
     render :text => data, :content_type => 'text/plain'
   end
 

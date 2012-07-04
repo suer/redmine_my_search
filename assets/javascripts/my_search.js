@@ -15,7 +15,6 @@
     var matchedData = [];
     var selectedIndex = 0;
     document.addEventListener('keydown', function(e) {
-        console.log(e.keyCode);
         if ((e.ctrlKey && e.keyCode == G) || e.keyCode == ESC) {
             toggleBox();
         }
