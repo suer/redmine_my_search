@@ -31,12 +31,14 @@
                 selectedIndex += 1;
                 select(selectedIndex);
             }
+            Event.stop(e);
             return;
         } else if (e.keyCode == UP) {
             if (selectedIndex > 0) {
                 selectedIndex -= 1;
                 select(selectedIndex);
             }
+            Event.stop(e);
             return;
         }
         var value = $('my-search-input').value;
