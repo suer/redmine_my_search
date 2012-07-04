@@ -55,7 +55,7 @@
 
     function search(value) {
         var len = data.length;
-        var regExp = new RegExp(value);
+        var regExp = new RegExp(value, 'i');
         matchedData = [];
         for (var i = 0; i < len; i++) {
             target = data[i]['title'];
