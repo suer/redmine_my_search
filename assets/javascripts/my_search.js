@@ -27,7 +27,7 @@
             move();
             return;
         } else if (e.keyCode == DOWN) {
-            if (selectedIndex < matchedData.length - 1) {
+            if (selectedIndex < Math.min(MAX_MATCHED, matchedData.length) - 1) {
                 selectedIndex += 1;
                 select(selectedIndex);
             }
