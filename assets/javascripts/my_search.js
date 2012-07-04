@@ -24,10 +24,7 @@
             return;
         }
         if (e.keyCode == ENTER) {
-            var url = $('my-search-url').innerText;
-            if (url) {
-                location.href = url;
-            }
+            move();
             return;
         } else if (e.keyCode == DOWN) {
             if (selectedIndex < matchedData.length - 1) {
@@ -50,12 +47,16 @@
         displayResults();
     });
 
+    function move() {
+        location.href = matchedData[selectedIndex]['url'];
+    }
+
     function search(value) {
         var len = data.length;
         var regExp = new RegExp(value);
         matchedData = [];
         for (var i = 0; i < len; i++) {
-            target = data[i]['title'] + data[i]['description'];
+            target = data[i]['title'];
             if (target.match(regExp)) {
                 matchedData.push(data[i]);
             }
@@ -71,10 +72,6 @@
                 $('my-search-result-' + i).style.backgroundColor = '#333333';
             }
         }
-
-        $('my-search-title').innerHTML = matchedData[index]['title'];
-        $('my-search-description').innerHTML = matchedData[index]['description'];
-        $('my-search-url').innerHTML = matchedData[index]['url'];
     }
 
     function toggleBox() {
@@ -128,8 +125,7 @@
         var min = Math.min(MAX_MATCHED, len);
         for (var i = 0; i < min; i++) {
             html = '<div id="my-search-result-' + i + '">'
-            html += '<span>' + matchedData[i]['title'] + '</span>: '
-            html += '<span>' + matchedData[i]['description'] + '</span>'
+            html += '<span>' + matchedData[i]['title'] + '</span> '
             html += '<span class="my-search-url">' + matchedData[i]['url'] + '</span>'
             html += '</div>';
             new Insertion.Bottom('my-search-results', html);
