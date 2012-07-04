@@ -40,3 +40,7 @@
 .my-search-url {
     float: right;
 }
+
+#my-search-results {
+    margin-top: 10px;
+}
