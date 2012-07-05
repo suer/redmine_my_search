@@ -115,9 +115,9 @@
     }
 
     function parseData(text) {
-        var wikiPageRegExp = new RegExp(".+/projects/.+/wiki/.+");
+        var wikiPageRegExp = new RegExp(".+/projects/(.+)/wiki/.+");
         var projectPageRegExp = new RegExp(".+/projects/.+");
-        var issuePageRegExp = new RegExp(".+/issues/.+");
+        var issuePageRegExp = new RegExp(".+/issues/(.+)");
         var textArray = text.split(/\r\n|\r|\n/);
         var len = textArray.length;
         var obj = {}
@@ -128,14 +128,14 @@
                 obj['description'] = textArray[i];
             } else if (i % 3 == 2) {
                 obj['url'] = textArray[i];
-                data.push(obj);
                 if (obj['url'].match(wikiPageRegExp)) {
-                    obj['type'] = 'Wiki';
+                    obj['type'] = 'Wiki: ' + obj['url'].match(wikiPageRegExp)[1];
                 } else if (obj['url'].match(projectPageRegExp)) {
                     obj['type'] = 'Project';
                 } else if (obj['url'].match(issuePageRegExp)) {
-                    obj['type'] = 'Issue';
+                    obj['type'] = 'Issue #' + obj['url'].match(issuePageRegExp)[1];
                 }
+                data.push(obj);
                 obj = {};
             }
         }
