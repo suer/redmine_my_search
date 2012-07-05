@@ -15,13 +15,28 @@
     var matchedData = [];
     var selectedIndex = 0;
     document.addEventListener('keydown', function(e) {
-        if ((e.ctrlKey && e.keyCode == G) || e.keyCode == ESC) {
+        if (e.ctrlKey && e.keyCode == G) {
+            toggleBox();
+        }
+        if ($('my-search-box').style.display == 'block' && e.keyCode == ESC) {
             toggleBox();
         }
     });
 
+    $('my-search-input').addEventListener('keyup', function(e) {
+        if ([DOWN, UP, ENTER, ESC].indexOf(e.keyCode) >= 0) {
+            return;
+        }
+        var value = $('my-search-input').value;
+        if (value == null || value.length == 0) {
+            return;
+        }
+        search(value);
+        displayResults();
+    });
+
     $('my-search-input').addEventListener('keydown', function(e) {
-        if (e.ctrlKey && e.keyCode == G) {
+        if ((e.ctrlKey && e.keyCode == G) || e.keyCode == ESC) {
             return;
         }
         if (e.keyCode == ENTER) {
@@ -42,12 +57,6 @@
             Event.stop(e);
             return;
         }
-        var value = $('my-search-input').value;
-        if (value == null || value.length == 0) {
-            return;
-        }
-        search(value);
-        displayResults();
     });
 
     function move() {
