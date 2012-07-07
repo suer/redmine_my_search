@@ -5,8 +5,6 @@
     var UP = 38;
     var RIGHT = 39;
     var DOWN = 40;
-    var G = 71;
-    var ESC =27;
     var ENTER = 13;
 
     var MAX_MATCHED = 5;
@@ -14,17 +12,13 @@
     var data = [];
     var matchedData = [];
     var selectedIndex = 0;
-    document.addEventListener('keydown', function(e) {
-        if (e.ctrlKey && e.keyCode == G) {
-            toggleBox();
-        }
-        if ($('my-search-box').style.display == 'block' && e.keyCode == ESC) {
-            toggleBox();
-        }
+
+    $$('.my-search-plugin-menu')[0].addEventListener('click', function(e) {
+        toggleBox();
     });
 
     $('my-search-input').addEventListener('keyup', function(e) {
-        if ([DOWN, UP, ENTER, ESC].indexOf(e.keyCode) >= 0) {
+        if ([DOWN, UP, ENTER].indexOf(e.keyCode) >= 0) {
             return;
         }
         var value = $('my-search-input').value;
@@ -36,9 +30,6 @@
     });
 
     $('my-search-input').addEventListener('keydown', function(e) {
-        if ((e.ctrlKey && e.keyCode == G) || e.keyCode == ESC) {
-            return;
-        }
         if (e.keyCode == ENTER) {
             move();
             return;
@@ -155,7 +146,6 @@
         if (min > 0) {
             select(0);
         }
-
     }
 
     function getBaseURL() {
