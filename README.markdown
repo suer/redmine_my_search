@@ -11,7 +11,7 @@ Install
 ------------------------------
 Type below commands:
 
-    $ cd $RAILS_ROOT/vender/plugins
+    $ cd $RAILS_ROOT/plugins
     $ git clone git://github.com/suer/redmine_my_search.git
 
 Then, restart your redmine.
@@ -20,7 +20,7 @@ Access to http://HOST_NAME:PORT_NUMBER/redmine/my_search/ to install the chrome 
 
 Requirements
 ------------------------------
-* Redmine 1.2 or later
+* Redmine 2.0
 
 Credits
 ------------------------------
