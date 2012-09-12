@@ -3,7 +3,7 @@ require 'my_search_view_listener'
 
 Redmine::Plugin.register :redmine_my_search do
   name 'Redmine My Search plugin'
-  author 'suer, mallowlabs'
+  author 'suer'
   description 'This plugin generate text data for searching'
   version '0.0.4'
   url 'https://github.com/suer/redmine_my_search'
