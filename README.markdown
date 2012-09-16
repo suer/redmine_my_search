@@ -20,7 +20,7 @@ Access to http://HOST_NAME:PORT_NUMBER/redmine/my_search/ to install the chrome 
 
 Requirements
 ------------------------------
-* Redmine 2.0
+* Redmine 2.1
 
 Credits
 ------------------------------

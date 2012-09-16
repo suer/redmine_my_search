@@ -15,50 +15,51 @@
     var selectedIndex = 0;
     var prevValue = null;
 
-    $$('.my-search-plugin-menu')[0].addEventListener('click', function(e) {
+    $('.my-search-plugin-menu').click(function() {
         toggleBox();
-        Event.stop(e);
         return false;
     });
 
-    $('my-search-input').addEventListener('keypress', function(e) {
+    $('#my-search-input').keypress(function(e) {
         if (e.keyCode != ENTER) {
-            return;
+            return true;
         }
         move();
-    }, false);
+    });
 
-    $('my-search-input').addEventListener('keyup', function(e) {
+    $('#my-search-input').keyup(function(e) {
         if ([DOWN, UP].indexOf(e.keyCode) >= 0) {
-            return;
+            return true;
         }
-        var value = $('my-search-input').value;
+        var value = $('#my-search-input').val();
         if (value == null || value.length == 0) {
-            return;
+            return true;
         }
         if (value != prevValue) {
             prevValue = value;
             search(value);
             displayResults();
         }
+        return true;
     });
 
-    $('my-search-input').addEventListener('keydown', function(e) {
+    $('#my-search-input').keydown(function(e) {
         if (e.keyCode == DOWN) {
             if (selectedIndex < Math.min(MAX_MATCHED, matchedData.length) - 1) {
                 selectedIndex += 1;
                 select(selectedIndex);
             }
-            Event.stop(e);
+            return false;
         } else if (e.keyCode == UP) {
             if (selectedIndex > 0) {
                 selectedIndex -= 1;
                 select(selectedIndex);
             }
-            Event.stop(e);
+            return false;
         } else if (e.keyCode == ESC) {
             toggleBox();
         }
+        return true;
     });
 
     function move() {
@@ -81,9 +82,9 @@
         var min = Math.min(MAX_MATCHED, matchedData.length);
         for (var i = 0; i < min; i++) {
             if (i == index) {
-                $('my-search-result-' + i).style.backgroundColor = '#888888';
+                $('#my-search-result-' + i).css({backgroundColor: '#888888'});
             } else {
-                $('my-search-result-' + i).style.backgroundColor = '#333333';
+                $('#my-search-result-' + i).css({backgroundColor: '#333333'});
             }
         }
     }
@@ -93,29 +94,27 @@
             loadData();
         }
 
-        var display = $('my-search-box').style.display;
-        if (display == 'none') {
-            $('my-search-box').style.display = 'block';
-            $('my-search-input').focus();
-        } else {
-            $('my-search-box').style.display = 'none';
-            $('my-search-input').value = '';
-            matchedData = [];
-            prevValue = null;
-            displayResults();
-        }
+        var searchBox = $('#my-search-box').toggle('normal', function() {
+            if (searchBox.css('display') == 'block') {
+                $('#my-search-input').focus();
+            } else {
+                matchedData = [];
+                prevValue = null;
+                displayResults();
+            }
+        });
     }
 
     function loadData() {
-        new Ajax.Request(
+        $.ajax(
             getBaseURL() + '/my_search/data_all',
             {
                 method: 'get',
                 parameters: '',
-                onComplete: function (request) {
-                    parseData(request.responseText);
-                    $('my-search-box').style.display = 'block';
-                    $('my-search-input').focus();
+                success: function (response) {
+                    parseData(response);
+                    $('#my-search-box').show();
+                    $('#my-search-input').focus();
                 }
             });
     }
@@ -151,7 +150,7 @@
     }
 
     function displayResults() {
-        $('my-search-results').innerHTML = '';
+        $('#my-search-results').empty();
         var len = matchedData.length;
         var min = Math.min(MAX_MATCHED, len);
         for (var i = 0; i < min; i++) {
@@ -159,7 +158,7 @@
             html += '<span>' + matchedData[i]['title'] + '</span> '
             html += generateSubtitleElement(matchedData[i]);
             html += '</div>';
-            new Insertion.Bottom('my-search-results', html);
+            $('#my-search-results').append(html);
         }
         if (min > 0) {
             select(0);
