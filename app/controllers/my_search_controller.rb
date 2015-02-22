@@ -7,13 +7,13 @@ class MySearchController < ApplicationController
 
   def data
     retrieve_query
-    issues = Issue.visible.find(:all, :order => "issues.id desc")
+    issues = Issue.visible.order("issues.id desc")
     render :text => issues.inject('') {|list, issue| list << issue_to_s(issue) }, :content_type => 'text/plain'
   end
 
   def data_all
     retrieve_query
-    issues = Issue.visible.find(:all, :order => "issues.id desc")
+    issues = Issue.visible.order("issues.id desc")
     projects = Project.visible
     data = projects.inject('') {|list, project| list << project_to_s(project) }
     projects.each do |project|
